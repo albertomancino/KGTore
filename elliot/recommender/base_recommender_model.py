@@ -119,6 +119,13 @@ class BaseRecommenderModel(ABC):
     def get_results(self):
         pass
 
+    def get_base_params_shortcut(self):
+        return "_".join([str(k) + "=" + str(v).replace(".", "$") for k, v in
+                         dict({"seed": self._seed,
+                               "e": self._epochs,
+                               "bs": self._batch_size}).items()
+                         ])
+
 
 def init_charger(init):
     @wraps(init)
@@ -137,3 +144,4 @@ def init_charger(init):
         self._saving_filepath = f'{self._config.path_output_rec_weight}{self.name}/best-weights-{self.name}'
 
     return new_init
+

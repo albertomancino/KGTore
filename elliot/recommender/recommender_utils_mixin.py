@@ -122,3 +122,4 @@ class RecMixin(object):
         else:
             val_results = np.argmax([r[self._validation_k]["val_results"][self._validation_metric] for r in self._results])
         return val_results
+

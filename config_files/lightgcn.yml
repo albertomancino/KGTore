@@ -1,0 +1,46 @@
+experiment:
+  dataset: facebook-books
+  data_config:
+    strategy: dataset
+    dataset_path: ../data/{0}/dataset.tsv
+    dataloader: KGFlexLoader
+    side_information:
+      work_directory: ../data/{0}
+      map: ../data/{0}/mapping.tsv
+      features: ../data/{0}/item_features.tsv
+      predicates: ../data/{0}/predicate_mapping.tsv
+  prefiltering:
+    strategy: iterative_k_core
+    core: 5
+  splitting:
+    test_splitting:
+      strategy: random_subsampling
+      test_ratio: 0.2
+  top_k: 50
+  evaluation:
+    cutoffs: [10, 20, 50]
+    simple_metrics: [Recall, Precision, nDCG, EPC, EFD, Gini, SEntropy]
+  external_models_path: ../external/models/__init__.py
+  models:
+    external.LightGCN:
+      meta:
+        hyper_max_evals: 10
+        hyper_opt_alg: tpe
+        verbose: True
+        save_weights: False
+        save_recs: False
+        validation_rate: 1
+        validation_metric: Recall@20
+        restore: False
+      lr: [ loguniform, -9.210340372, -5.298317367 ]
+      epochs: 400
+      factors: 64
+      batch_size: 1024
+      l_w: [ loguniform, -11.512925465, -2.30258509299 ]
+      n_layers: 1
+      seed: 123
+      early_stopping:
+        patience: 10
+        monitor: Recall@20
+        mode: auto
+        verbose: True
