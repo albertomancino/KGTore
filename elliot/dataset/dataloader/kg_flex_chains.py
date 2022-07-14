@@ -354,6 +354,7 @@ class KGFlexDataObject:
         self.side_information_data = side_information_data
         self.args = args
         self.kwargs = kwargs
+
         self.train_dict = self.dataframe_to_dict(data_tuple[0])
         self.train_pd = data_tuple[0]
 
