@@ -52,7 +52,6 @@ class EGCFv2(RecMixin, BaseRecommenderModel):
                                           sparse_sizes=(self._num_users + self._num_items,
                                                         self._num_users + self._num_items))
 
-
         edge_features = load_dataset(self._edge_features_path, default_path=False)
 
         #selected_users = set.intersection(set(edge_features['user']), set(self._data.public_users.keys()))
