@@ -33,37 +33,37 @@ experiment:
         hyper_opt_alg: tpe
       neighbors: [ uniform, 5, 700 ]
       similarity: cosine
-      external.LightGCN:
-        meta:
-          hyper_max_evals: 10
-          hyper_opt_alg: tpe
-          verbose: True
-          save_weights: False
-          save_recs: False
-          validation_rate: 1
-        lr: [ loguniform, -9.210340372, -5.298317367 ]
-        epochs: 200
-        factors: 64
-        batch_size: 512
-        l_w: [ loguniform, -11.512925465, -2.30258509299 ]
-        n_layers: 3
-        seed: 42
-      external.DGCF:
-        meta:
-          hyper_max_evals: 10
-          hyper_opt_alg: tpe
-          verbose: True
-          save_weights: False
-          save_recs: False
-          validation_rate: 1
-        lr: [ loguniform, -9.210340372, -6.90775527898 ]
-        epochs: 200
-        factors: 64
-        batch_size: 512
-        l_w_bpr: [ loguniform, -9.21034037198, -4.60517018599 ]
-        l_w_ind: [ loguniform, -9.21034037198, -4.60517018599 ]
-        ind_batch_size: 512
-        n_layers: 1
-        routing_iterations: 2
-        intents: 4
-        seed: 42
+    external.LightGCN:
+      meta:
+        hyper_max_evals: 10
+        hyper_opt_alg: tpe
+        verbose: True
+        save_weights: False
+        save_recs: False
+        validation_rate: 1
+      lr: [ loguniform, -9.210340372, -5.298317367 ]
+      epochs: 200
+      factors: 64
+      batch_size: 512
+      l_w: [ loguniform, -11.512925465, -2.30258509299 ]
+      n_layers: 3
+      seed: 42
+    external.DGCF:
+      meta:
+        hyper_max_evals: 10
+        hyper_opt_alg: tpe
+        verbose: True
+        save_weights: False
+        save_recs: False
+        validation_rate: 1
+      lr: [ loguniform, -9.210340372, -6.90775527898 ]
+      epochs: 200
+      factors: 64
+      batch_size: 512
+      l_w_bpr: [ loguniform, -9.21034037198, -4.60517018599 ]
+      l_w_ind: [ loguniform, -9.21034037198, -4.60517018599 ]
+      ind_batch_size: 512
+      n_layers: 1
+      routing_iterations: 2
+      intents: 4
+      seed: 42
