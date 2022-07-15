@@ -1,0 +1,69 @@
+experiment:
+  dataset: yahoo-movies
+  data_config:
+    strategy: dataset
+    dataset_path: ../data/{0}/dataset.tsv
+    dataloader: KGFlexLoader
+    side_information:
+      work_directory: ../data/{0}
+      map: ../data/{0}/mapping.tsv
+      features: ../data/{0}/item_features.tsv
+      predicates: ../data/{0}/predicate_mapping.tsv
+  prefiltering:
+    strategy: iterative_k_core
+    core: 10
+  splitting:
+    test_splitting:
+        strategy: random_subsampling
+        test_ratio: 0.2
+  top_k: 10
+  gpu: 0
+  external_models_path: ../external/models/__init__.py
+  evaluation:
+    cutoffs: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    simple_metrics: [nDCGRendle2020, nDCG, HR, Precision, Recall, MAP, MRR, ItemCoverage, UserCoverage, NumRetrieved, UserCoverage, Gini, SEntropy, EFD, EPC]
+    relevance_threshold: 3
+  models:
+    external.UserKNN:
+      meta:
+        validation_rate: 1
+        save_recs: True
+        verbose: True
+        hyper_max_evals: 10
+        hyper_opt_alg: tpe
+      neighbors: [ uniform, 5, 700 ]
+      similarity: cosine
+      external.LightGCN:
+        meta:
+          hyper_max_evals: 10
+          hyper_opt_alg: tpe
+          verbose: True
+          save_weights: False
+          save_recs: False
+          validation_rate: 1
+        lr: [ loguniform, -9.210340372, -5.298317367 ]
+        epochs: 200
+        factors: 64
+        batch_size: 512
+        l_w: [ loguniform, -11.512925465, -2.30258509299 ]
+        n_layers: 3
+        seed: 42
+      external.DGCF:
+        meta:
+          hyper_max_evals: 10
+          hyper_opt_alg: tpe
+          verbose: True
+          save_weights: False
+          save_recs: False
+          validation_rate: 1
+        lr: [ loguniform, -9.210340372, -6.90775527898 ]
+        epochs: 200
+        factors: 64
+        batch_size: 512
+        l_w_bpr: [ loguniform, -9.21034037198, -4.60517018599 ]
+        l_w_ind: [ loguniform, -9.21034037198, -4.60517018599 ]
+        ind_batch_size: 512
+        n_layers: 1
+        routing_iterations: 2
+        intents: 4
+        seed: 42
