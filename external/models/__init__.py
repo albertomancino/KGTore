@@ -7,3 +7,4 @@ from .item_knn import ItemKNN
 from .dgcf import DGCF
 from .lightgcn import LightGCN
 from .egcfv2 import EGCFv2
+from .user_knn import UserKNN
