@@ -14,8 +14,8 @@ from elliot.recommender.recommender_utils_mixin import RecMixin
 from elliot.utils.write import store_recommendation
 
 from elliot.recommender.base_recommender_model import BaseRecommenderModel
-from external.models.user_knn.user_knn_similarity import Similarity
-from external.models.user_knn.aiolli_ferrari import AiolliSimilarity
+from .user_knn_similarity import Similarity
+from .aiolli_ferrari import AiolliSimilarity
 from elliot.recommender.base_recommender_model import init_charger
 
 
